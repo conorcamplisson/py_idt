@@ -39,7 +39,7 @@ You might find this module useful if you design DNA oligos in python and then or
     ```
 
 
-2. Example usage ([examples/test_module.py](./examples/test_module.py)):
+2. Example usage ([test_module.py](./test_module.py)):
 
 ```
 from py_idt import IDTOrder
