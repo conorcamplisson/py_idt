@@ -54,7 +54,7 @@ def main():
 
     # add some oligos to this order
     order.add_oligo('Test_oligo_1', 'ACGTACGTACGTACGTACGT')
-    order.add_oligo('Test_oligo_2', 'TGCATGCATGCATGCATGCA', scale='250nm', purification='HPLC')
+    order.add_oligo('Test_oligo_2', 'TGCATGCATGCATGCATGCA', scale='250nm', purification='PAGE')
     order.add_oligo('Test_oligo_3', '/5Phos/AAAAACCCCCGGGGGTTTTT', scale='100nm', purification='HPLC')
 
     # create Excel IDT bulk order form
