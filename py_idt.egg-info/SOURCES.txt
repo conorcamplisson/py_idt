@@ -1,0 +1,12 @@
+README.md
+setup.py
+py_idt/__init__.py
+py_idt/defaults.py
+py_idt/idt_order.py
+py_idt/oligo.py
+py_idt/utils.py
+py_idt.egg-info/PKG-INFO
+py_idt.egg-info/SOURCES.txt
+py_idt.egg-info/dependency_links.txt
+py_idt.egg-info/requires.txt
+py_idt.egg-info/top_level.txt

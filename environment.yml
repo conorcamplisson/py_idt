@@ -1,0 +1,8 @@
+name: py_idt_env
+channels:
+  - defaults
+dependencies:
+  - pip=19.0.3
+  - python=3.7.3
+  - pip:
+    - git+ssh://git@github.com/conorcamplisson/py_idt.git
