@@ -41,7 +41,7 @@ You might find this module useful if you design DNA oligos in python and then or
 
 2. Example usage ([test_module.py](./test_module.py)):
 
-```
+```python
 from py_idt import IDTOrder
 
 # configure output directory
