@@ -69,16 +69,16 @@ An Excel file suitable for upload to IDT's custom DNA oligo bulk input form is g
 
 `/example_order/<timestamp>_idt_order.xlsx`
 
-![Example IDT Order](./images/idt_example_order.PNG)
+![Example IDT Order](./images/idt_example_order.PNG)[]()
 
 3. To order oligos using IDT's Bulk Input feature, upload the Excel file here: https://www.idtdna.com/site/order/oligoentry
 
-![IDT bulk input](./images/idt_bulk_input.PNG)
+![IDT bulk input](./images/idt_bulk_input.PNG)[]()
 
 4. Once you upload the Excel file, click "Update" to generate the oligos.
 
-![IDT oligo input](./images/idt_oligo_input.PNG)
+![IDT oligo input](./images/idt_oligo_input.PNG)[]()
 
 5. At this point, you can add the oligos to your cart and check out.
 
-![IDT checkout](./images/idt_checkout.PNG)
+![IDT checkout](./images/idt_checkout.PNG)[]()
