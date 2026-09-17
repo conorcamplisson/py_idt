@@ -100,10 +100,11 @@ class IDTOrder:
         time_stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         file_path = os.path.join(output_dir, f"{time_stamp}_idt_order.xlsx")
 
-        # Create an excel sheet using IDT oligo data
-        writer = pd.ExcelWriter(file_path, engine="xlsxwriter")
-        df.to_excel(writer, sheet_name="Sheet1", index=False)
-        writer.save()
+        # create an excel sheet using IDT oligo data
+        # NOTE: pandas 2.0 removed ExcelWriter.save(); close() is the supported way to flush and
+        # write the file, and it is also what the context manager calls.
+        with pd.ExcelWriter(file_path, engine="xlsxwriter") as writer:
+            df.to_excel(writer, sheet_name="Sheet1", index=False)
 
     def __str__(self):
         """String object representation."""
