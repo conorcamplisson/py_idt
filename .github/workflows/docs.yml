@@ -1,0 +1,70 @@
+# Docs — builds the versioned site onto the gh-pages branch (canon/06).
+#
+# PROPOSED template for canon/08. Not yet run against a real repo.
+#
+#   push to dev   -> gh-pages/dev/        (the development docs)
+#   tag vX.Y.Z    -> gh-pages/X.Y.Z/  + switcher.json + stable/ -> X.Y.Z
+#
+# A released version's folder is never rebuilt, so every version's docs keep describing exactly
+# what its users installed (canon/06).
+name: docs
+
+on:
+  push:
+    branches: [dev]
+    tags: ["v*"]
+
+permissions:
+  contents: write        # the only thing that writes gh-pages
+
+concurrency:
+  group: docs            # two docs deploys must never interleave on one branch
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: astral-sh/setup-uv@v10.1.0
+        with:
+          enable-cache: true
+      - run: uv sync --locked
+      - name: Work out the destination folder
+        id: dest
+        run: |
+          if [[ "${GITHUB_REF}" == refs/tags/v* ]]; then
+            echo "folder=${GITHUB_REF#refs/tags/v}" >> "$GITHUB_OUTPUT"
+            echo "release=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "folder=dev" >> "$GITHUB_OUTPUT"
+            echo "release=false" >> "$GITHUB_OUTPUT"
+          fi
+      - run: uv run sphinx-build -W --keep-going docs docs/_build/html
+      - name: Publish into gh-pages
+        env:
+          SWITCHER: |
+            import json, pathlib, sys
+            version = sys.argv[1]
+            path = pathlib.Path("gh-pages/switcher.json")
+            entries = json.loads(path.read_text()) if path.exists() else []
+            entries = [e for e in entries if e.get("version") != version]
+            entries.insert(0, {"name": version, "version": version, "url": f"../{version}/"})
+            path.write_text(json.dumps(entries, indent=2))
+        run: |
+          set -euo pipefail
+          FOLDER="${{ steps.dest.outputs.folder }}"
+          git fetch origin gh-pages && git worktree add gh-pages origin/gh-pages
+          rm -rf "gh-pages/${FOLDER}"
+          cp -r docs/_build/html "gh-pages/${FOLDER}"
+          if [[ "${{ steps.dest.outputs.release }}" == "true" ]]; then
+            rm -rf gh-pages/stable && cp -r docs/_build/html gh-pages/stable
+            # switcher.json feeds the pydata theme's version dropdown. The script is passed in
+            # as an env var rather than a heredoc: an unindented heredoc body would terminate
+            # this YAML block scalar and silently truncate the step.
+            python -c "$SWITCHER" "$FOLDER"
+          fi
+          cd gh-pages
+          git add -A
+          git -c user.name=ci -c user.email=ci@local commit -m "docs: ${FOLDER}" || exit 0
+          git push origin HEAD:gh-pages

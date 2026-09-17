@@ -2,83 +2,68 @@
 
 A python interface for creating [IDT](https://www.idtdna.com/site/order/oligoentry) bulk oligo order forms in Excel.
 
+[![PyPI](https://img.shields.io/pypi/v/py_idt.svg)](https://pypi.org/project/py_idt/)
+[![Python versions](https://img.shields.io/pypi/pyversions/py_idt.svg)](https://pypi.org/project/py_idt/)
+[![CI](https://github.com/conorcamplisson/py_idt/actions/workflows/ci.yml/badge.svg)](https://github.com/conorcamplisson/py_idt/actions/workflows/ci.yml)
+[![Docs](https://img.shields.io/badge/docs-latest-blue.svg)](https://conorcamplisson.github.io/py_idt/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/conorcamplisson/py_idt/blob/master/LICENSE)
+
 You might find this module useful if you design DNA oligos in python and then order them from IDT.
 
-### Installation and Usage
+## Install
 
-1. Install the `py_idt` module:
+```bash
+pip install py_idt
+```
 
-* Option 1) Using `conda`:
-
-    A minimal conda [environment.yml](./environment.yml) is provided:
-
-    ```
-    name: py_idt_env
-    channels:
-      - defaults
-    dependencies:
-      - pip=19.0.3
-      - python=3.7.3
-      - pip:
-        - git+ssh://git@github.com/conorcamplisson/py_idt.git
-    ```
-
-    To create and activate a conda environment using this file:
-
-    ```
-    $ git clone git@github.com:conorcamplisson/py_idt.git
-    $ cd py_idt/
-    $ conda env create -f environment.yml
-    $ source activate py_idt_env
-    ```
-
-* Option 2) Using `pip`:
-
-    ```
-    $ pip install git+ssh://git@github.com/conorcamplisson/py_idt.git
-    ```
-
-
-2. Example usage ([test_module.py](./test_module.py)):
+## Quickstart
 
 ```python
 from py_idt import IDTOrder
 
-# configure output directory
+# where the .xlsx will be written
 IDTOrder.settings['output_dir'] = 'example_order'
 
-def main():
+# an order carries defaults that each oligo can override
+order = IDTOrder()
 
-    # create a new IDT oligonucleotide order
-    order = IDTOrder()
+order.add_oligo('Test_oligo_1', 'ACGTACGTACGTACGTACGT')
+order.add_oligo('Test_oligo_2', 'TGCATGCATGCATGCATGCATGCATGCATGCATGCATGCA',
+                scale='250nm', purification='PAGE')
+order.add_oligo('Test_oligo_3', '/5Phos/AAAAACCCCCGGGGGTTTTT',
+                scale='100nm', purification='HPLC')
 
-    # add some oligos to this order
-    order.add_oligo('Test_oligo_1', 'ACGTACGTACGTACGTACGT')
-    order.add_oligo('Test_oligo_2', 'TGCATGCATGCATGCATGCATGCATGCATGCATGCATGCA', scale='250nm', purification='PAGE')
-    order.add_oligo('Test_oligo_3', '/5Phos/AAAAACCCCCGGGGGTTTTT', scale='100nm', purification='HPLC')
-
-    # create Excel IDT bulk order form
-    order.save()
-
-
-if __name__ == '__main__':
-    main()
+# write the IDT bulk order form
+order.save()
 ```
 
-An Excel file suitable for upload to IDT's custom DNA oligo bulk input form is generated:
+That writes an Excel file suitable for upload to IDT's custom DNA oligo bulk input form:
 
-`/example_order/<timestamp>_idt_order.xlsx`
+`example_order/<timestamp>_idt_order.xlsx`
 
-[![Example IDT Order](./images/idt_example_order.PNG)](#)
+[![Example IDT Order](https://raw.githubusercontent.com/conorcamplisson/py_idt/master/images/idt_example_order.PNG)](https://raw.githubusercontent.com/conorcamplisson/py_idt/master/images/idt_example_order.PNG)
 
-3. To order oligos using IDT's Bulk Input feature, upload the Excel file here: https://www.idtdna.com/site/order/oligoentry
+A runnable version of this is in [examples/basic_order.py](https://github.com/conorcamplisson/py_idt/blob/master/examples/basic_order.py).
 
-[![IDT bulk input](./images/idt_bulk_input.PNG)](#)
+## Ordering from the generated file
 
-4. Once you upload the Excel file, click "Update" to generate the oligos.
+1. Upload the Excel file to IDT's Bulk Input page: https://www.idtdna.com/site/order/oligoentry
 
-[![IDT oligo input](./images/idt_oligo_input.PNG)](#)
+   [![IDT bulk input](https://raw.githubusercontent.com/conorcamplisson/py_idt/master/images/idt_bulk_input.PNG)](https://raw.githubusercontent.com/conorcamplisson/py_idt/master/images/idt_bulk_input.PNG)
 
-5. At this point, you can add the oligos to your cart and check out.
+2. Click "Update" to generate the oligos.
 
-[![IDT checkout](./images/idt_checkout.PNG)](#)
+   [![IDT oligo input](https://raw.githubusercontent.com/conorcamplisson/py_idt/master/images/idt_oligo_input.PNG)](https://raw.githubusercontent.com/conorcamplisson/py_idt/master/images/idt_oligo_input.PNG)
+
+3. Add the oligos to your cart and check out.
+
+   [![IDT checkout](https://raw.githubusercontent.com/conorcamplisson/py_idt/master/images/idt_checkout.PNG)](https://raw.githubusercontent.com/conorcamplisson/py_idt/master/images/idt_checkout.PNG)
+
+## Documentation
+
+Full documentation, including the API reference, is at
+<https://conorcamplisson.github.io/py_idt/>.
+
+## License
+
+MIT. See [LICENSE](https://github.com/conorcamplisson/py_idt/blob/master/LICENSE).

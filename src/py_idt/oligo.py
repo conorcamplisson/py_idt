@@ -1,10 +1,10 @@
+"""a single oligo on an order, with its scale and purification validated."""
 
-import sys
+from py_idt.defaults import PURIFICATION_DICT, SCALE_DICT
+from py_idt.utils import purification_codes, scale_codes
 
-from py_idt.defaults import SCALE_DICT, PURIFICATION_DICT
-from py_idt.utils import get_scales, get_purifications
 
-class Oligo(object):
+class Oligo:
     """Python representation of an IDT oligonucleotide to be ordered.
 
     Attributes:
@@ -26,8 +26,10 @@ class Oligo(object):
 
         Returns:
             None
-        """
 
+        Raises:
+            ValueError: if `scale` or `purification` is not a recognized IDT code.
+        """
         # store provided attributes
         self.name = name
         self.seq = seq
@@ -38,14 +40,20 @@ class Oligo(object):
         self.length = len(seq)
 
         # validate scale and purification
+        # NOTE: these raise rather than calling sys.exit(). A library that exits kills its
+        # caller's process, so a script importing py_idt could not catch a bad code and carry on.
         if self.scale not in SCALE_DICT:
-            sys.exit('\nError: {} is not a valid oligo scale. Try: {}'.format(scale, get_scales()))
+            raise ValueError(f"{scale!r} is not a valid oligo scale. Valid codes: {scale_codes()}")
         if self.purification not in PURIFICATION_DICT:
-            sys.exit('\nError: {} is not a valid oligo purification. Try: {}'.format(purification, get_purifications()))
+            raise ValueError(
+                f"{purification!r} is not a valid oligo purification. "
+                f"Valid codes: {purification_codes()}"
+            )
 
     def __str__(self):
         """String object representation."""
-        return('<Oligo: {} ({} bp), {}, {}>'.format(self.name, self.length, self.scale, self.purification))
+        return f"<Oligo: {self.name} ({self.length} bp), {self.scale}, {self.purification}>"
+
     def __repr__(self):
         """List object representation."""
-        return(self.__str__())
+        return self.__str__()
