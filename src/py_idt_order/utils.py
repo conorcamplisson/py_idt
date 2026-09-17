@@ -1,6 +1,6 @@
 """helpers for reporting the valid scale and purification codes."""
 
-from py_idt.defaults import PURIFICATION_DICT, SCALE_DICT
+from py_idt_order.defaults import PURIFICATION_DICT, SCALE_DICT
 
 
 def scale_codes():

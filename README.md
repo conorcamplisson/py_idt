@@ -1,9 +1,9 @@
-# py_idt
+# py_idt_order
 
 A python interface for creating [IDT](https://www.idtdna.com/site/order/oligoentry) bulk oligo order forms in Excel.
 
-[![PyPI](https://img.shields.io/pypi/v/py_idt.svg)](https://pypi.org/project/py_idt/)
-[![Python versions](https://img.shields.io/pypi/pyversions/py_idt.svg)](https://pypi.org/project/py_idt/)
+[![PyPI](https://img.shields.io/pypi/v/py-idt-order.svg)](https://pypi.org/project/py-idt-order/)
+[![Python versions](https://img.shields.io/pypi/pyversions/py-idt-order.svg)](https://pypi.org/project/py-idt-order/)
 [![CI](https://github.com/conorcamplisson/py_idt/actions/workflows/ci.yml/badge.svg)](https://github.com/conorcamplisson/py_idt/actions/workflows/ci.yml)
 [![Docs](https://img.shields.io/badge/docs-latest-blue.svg)](https://conorcamplisson.github.io/py_idt/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/conorcamplisson/py_idt/blob/master/LICENSE)
@@ -13,13 +13,13 @@ You might find this module useful if you design DNA oligos in python and then or
 ## Install
 
 ```bash
-pip install py_idt
+pip install py-idt-order
 ```
 
 ## Quickstart
 
 ```python
-from py_idt import IDTOrder
+from py_idt_order import IDTOrder
 
 # where the .xlsx will be written
 IDTOrder.settings['output_dir'] = 'example_order'

@@ -1,7 +1,7 @@
 """a single oligo on an order, with its scale and purification validated."""
 
-from py_idt.defaults import PURIFICATION_DICT, SCALE_DICT
-from py_idt.utils import purification_codes, scale_codes
+from py_idt_order.defaults import PURIFICATION_DICT, SCALE_DICT
+from py_idt_order.utils import purification_codes, scale_codes
 
 
 class Oligo:

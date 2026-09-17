@@ -5,9 +5,9 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from py_idt import __version__
+from py_idt_order import __version__
 
-project = "py_idt"
+project = "py_idt_order"
 author = "Conor Camplisson"
 copyright = "2026, Conor Camplisson"
 release = __version__
@@ -52,6 +52,6 @@ html_theme_options = {
     "use_edit_page_button": False,
 }
 
-html_title = f"py_idt {release}"
+html_title = f"{project} {release}"
 
 exclude_patterns = ["_build"]
