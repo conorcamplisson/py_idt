@@ -4,6 +4,12 @@ All notable changes to this project are documented here. Hand-edited, newest fir
 
 ## [Unreleased]
 
+### Added
+
+- `IDTOrder(output_dir=...)`, and assigning `order.output_dir`, now control where that order is
+  written. Previously the only way to choose a directory was `IDTOrder.settings["output_dir"]`,
+  which every order in the process shares.
+
 ### Changed
 
 - `Oligo`'s validation errors name the valid codes on one line, rather than embedding the full
@@ -17,6 +23,7 @@ All notable changes to this project are documented here. Hand-edited, newest fir
   to `src/py_idt/_version.py`, and the package moves to a `src/` layout. No functional change to
   any module.
 - `xlrd` dropped from the dependencies; it was declared but never imported.
+- A nested `output_dir` such as `out/orders` is created rather than raising `FileNotFoundError`.
 
 ### Fixed
 

@@ -61,11 +61,17 @@ order.add_oligo("phosphorylated", "/5Phos/AAAAACCCCCGGGGGTTTTT")
 
 ## Where the file goes
 
-`output_dir` is a **class-level** setting, so it applies to every order in the process:
+Set it per order, which is usually what you want:
 
 ```python
-IDTOrder.settings["output_dir"] = "example_order"
+order = IDTOrder(output_dir="example_order")
+# or later:
+order.output_dir = "somewhere/else"
 ```
+
+`IDTOrder.settings["output_dir"]` is the process-wide default every order starts from. Prefer the
+per-order form unless you really do want to move every order at once. Nested paths are created for
+you.
 
 `save()` creates the directory if needed and writes `<timestamp>_idt_order.xlsx`, so repeated runs
 never overwrite each other.

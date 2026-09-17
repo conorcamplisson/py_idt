@@ -23,13 +23,16 @@ class IDTOrder:
     # default settings
     settings = DEFAULT_PARAMS
 
-    def __init__(self, scale=None, purification=None):
+    def __init__(self, scale=None, purification=None, output_dir=None):
         """IDTOrder object initialization.
 
         Args:
             scale (str): Optionally override the default IDT scale code for this order.
             purification (str): Optionally override the default IDT purification code
                 for this order.
+            output_dir (str): Optionally override the directory this order is written to.
+                Applies to this order alone, unlike ``IDTOrder.settings["output_dir"]``,
+                which is shared by every order in the process.
 
         Returns:
             None
@@ -46,6 +49,8 @@ class IDTOrder:
             self.scale = scale
         if purification:
             self.purification = purification
+        if output_dir:
+            self.output_dir = output_dir
 
     def add_oligo(self, name, seq, scale=None, purification=None):
         """Add a new Oligo object to an IDT bulk oligo order.
@@ -94,9 +99,12 @@ class IDTOrder:
         df = pd.DataFrame(data=rows, columns=cols)
 
         # construct output .xlsx file path
-        output_dir = IDTOrder.settings["output_dir"]
-        if not os.path.exists(output_dir):
-            os.mkdir(output_dir)
+        # NOTE: this reads the INSTANCE attribute. It used to read IDTOrder.settings directly,
+        # so self.output_dir was assigned in __init__ and then never consulted: setting
+        # order.output_dir had no effect at all.
+        output_dir = self.output_dir
+        # makedirs, not mkdir: a nested path like "out/orders" raised FileNotFoundError
+        os.makedirs(output_dir, exist_ok=True)
         time_stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         file_path = os.path.join(output_dir, f"{time_stamp}_idt_order.xlsx")
 
