@@ -6,9 +6,9 @@
 #   tag vX.Y.Z.devN      -> guards -> build once -> TestPyPI -> install test -> stop (rehearsal)
 #
 # The same artifacts go to TestPyPI and to PyPI, so what was rehearsed is byte-for-byte what ships.
-# Publishing is `uv publish --trusted-publishing always` (canon/09): one toolchain, no stored token.
-# `always` rather than `automatic` so a misconfigured environment FAILS instead of quietly falling
-# back to looking for a password that is not there.
+# Publishing uses an API token per index (canon/09), taken from a GitHub repository secret.
+# Trusted publishing (OIDC) is the target end state and needs only this file to change; the
+# commented lines in each publish step show the swap.
 #
 # One-time setup this depends on:
 #   - a GitHub environment named `pypi` with the maintainer as a required reviewer (canon/09)
@@ -42,9 +42,12 @@ jobs:
             echo "is_prerelease=true" >> "$GITHUB_OUTPUT"
           else
             echo "is_prerelease=false" >> "$GITHUB_OUTPUT"
-            git fetch origin main
-            git merge-base --is-ancestor HEAD origin/main \
-              || { echo "::error::a final release tag must be on main"; exit 1; }
+            # the release branch is `main`, but accept `master` so a repo that has not been
+            # renamed still releases. Whichever exists on the remote is the release branch.
+            git fetch -q origin main master 2>/dev/null || true
+            RELEASE_BRANCH=$(git rev-parse --verify -q origin/main >/dev/null && echo main || echo master)
+            git merge-base --is-ancestor HEAD "origin/$RELEASE_BRANCH" \
+              || { echo "::error::a final release tag must be on $RELEASE_BRANCH"; exit 1; }
           fi
 
   build:
@@ -64,22 +67,23 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     environment: testpypi
-    permissions:
-      id-token: write          # trusted publishing; no token is stored anywhere
     steps:
       - uses: actions/download-artifact@v4
         with:
           name: dist
           path: dist/
       - uses: astral-sh/setup-uv@v6
-      - name: Upload to TestPyPI by trusted publishing
+      - name: Upload to TestPyPI
         # --check-url lets a re-run of a partially-failed job skip files already uploaded,
         # instead of erroring on the index's refusal to accept a version twice.
+        # To move to trusted publishing: drop UV_PUBLISH_TOKEN, add `--trusted-publishing always`,
+        # and give this job `permissions: id-token: write`.
+        env:
+          UV_PUBLISH_TOKEN: ${{ secrets.TESTPYPI_TOKEN }}
         run: |
           uv publish \
             --publish-url https://test.pypi.org/legacy/ \
-            --check-url https://test.pypi.org/simple/ \
-            --trusted-publishing always
+            --check-url https://test.pypi.org/simple/
 
   install-test:
     # Prove the uploaded artifact actually installs and imports, on every supported Python,
@@ -117,16 +121,18 @@ jobs:
     if: needs.guards.outputs.is-prerelease == 'false'
     runs-on: ubuntu-latest
     environment: pypi
-    permissions:
-      id-token: write
     steps:
       - uses: actions/download-artifact@v4
         with:
           name: dist
           path: dist/
       - uses: astral-sh/setup-uv@v6
-      - name: Upload to PyPI by trusted publishing
-        run: uv publish --trusted-publishing always
+      - name: Upload to PyPI
+        # To move to trusted publishing: drop UV_PUBLISH_TOKEN and add
+        # `--trusted-publishing always`, with `permissions: id-token: write` on this job.
+        env:
+          UV_PUBLISH_TOKEN: ${{ secrets.PYPI_TOKEN }}
+        run: uv publish --check-url https://pypi.org/simple/
 
   github-release:
     needs: pypi

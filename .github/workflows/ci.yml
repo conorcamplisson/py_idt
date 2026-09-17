@@ -1,5 +1,8 @@
 # CI — runs on every push to dev and every pull request into main.
 #
+# PROPOSED template for canon/08 "State flow from change to release". Not yet run against a real
+# repo; treat the first run as part of the review.
+#
 # Fill in before use:
 #   python-version   the matrix below is checked by python_support.py; refresh it whenever
 #                    that check reports a mismatch.
@@ -9,7 +12,7 @@ on:
   push:
     branches: [dev]
   pull_request:
-    branches: [main]
+    branches: [main, master]   # master accepted for repos not yet renamed
 
 concurrency:
   # A newer push to the same branch cancels the older run; a release must never be cancelled.
@@ -75,8 +78,9 @@ jobs:
           name: dist
           path: dist/
 
-  main-contained-in-dev:
-    # Only on a release pull request. If an urgent fix went to main and was never merged back,
+  release-branch-contained-in-dev:
+    # Only on a release pull request. If an urgent fix went to the release branch and was never
+    # merged back,
     # releasing now would quietly drop it — so refuse until the merge-back has happened.
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
@@ -84,8 +88,11 @@ jobs:
       - uses: actions/checkout@v5
         with:
           fetch-depth: 0        # the default shallow clone cannot compute ancestry
-      - name: main must be an ancestor of this branch
+      - name: the release branch must be an ancestor of this branch
         run: |
-          git fetch origin main
-          git merge-base --is-ancestor origin/main HEAD \
-            || { echo "::error::main is not contained in this branch — merge main into dev first"; exit 1; }
+          # the release branch is `main`, but accept `master` so a repo that has not been
+          # renamed still releases. Whichever exists on the remote is the release branch.
+          git fetch -q origin main master 2>/dev/null || true
+          RELEASE_BRANCH=$(git rev-parse --verify -q origin/main >/dev/null && echo main || echo master)
+          git merge-base --is-ancestor "origin/$RELEASE_BRANCH" HEAD \
+            || { echo "::error::$RELEASE_BRANCH is not contained in this branch — merge it into dev first"; exit 1; }
