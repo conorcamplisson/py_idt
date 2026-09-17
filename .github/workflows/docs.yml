@@ -9,8 +9,13 @@ name: docs
 
 on:
   push:
-    branches: [dev]
-    tags: ["v*"]
+    branches: [dev]                 # the development docs, on every push
+  workflow_run:
+    # A version folder is published only when the RELEASE succeeds, never on the tag alone.
+    # Building on the tag meant a release that failed after tagging still left its version on
+    # the site, offering docs for something nobody can install.
+    workflows: [release]
+    types: [completed]
 
 permissions:
   contents: write        # the only thing that writes gh-pages
@@ -21,9 +26,16 @@ concurrency:
 
 jobs:
   build-and-deploy:
+    # a failed release publishes nothing
+    if: >-
+      github.event_name == 'push' ||
+      github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ github.event_name == 'workflow_run'
+                   && github.event.workflow_run.head_sha || github.ref }}
       - uses: astral-sh/setup-uv@v10.1.0
         with:
           enable-cache: true
@@ -31,8 +43,10 @@ jobs:
       - name: Work out the destination folder
         id: dest
         run: |
-          if [[ "${GITHUB_REF}" == refs/tags/v* ]]; then
-            echo "folder=${GITHUB_REF#refs/tags/v}" >> "$GITHUB_OUTPUT"
+          if [[ "${{ github.event_name }}" == "workflow_run" ]]; then
+            # the release that just succeeded; its head_branch is the tag
+            VERSION="${{ github.event.workflow_run.head_branch }}"
+            echo "folder=${VERSION#v}" >> "$GITHUB_OUTPUT"
             echo "release=true" >> "$GITHUB_OUTPUT"
           else
             echo "folder=dev" >> "$GITHUB_OUTPUT"
