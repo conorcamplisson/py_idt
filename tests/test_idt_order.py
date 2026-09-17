@@ -2,7 +2,7 @@
 
 from pathlib import Path
 
-from py_idt import IDTOrder
+from py_idt_order import IDTOrder
 
 
 def test_a_new_order_is_empty():

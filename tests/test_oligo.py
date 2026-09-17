@@ -2,7 +2,7 @@
 
 import pytest
 
-from py_idt import Oligo
+from py_idt_order import Oligo
 
 
 def test_records_what_it_was_given():

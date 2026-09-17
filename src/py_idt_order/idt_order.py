@@ -5,8 +5,8 @@ from datetime import datetime
 
 import pandas as pd
 
-from py_idt.defaults import DEFAULT_PARAMS
-from py_idt.oligo import Oligo
+from py_idt_order.defaults import DEFAULT_PARAMS
+from py_idt_order.oligo import Oligo
 
 
 class IDTOrder:

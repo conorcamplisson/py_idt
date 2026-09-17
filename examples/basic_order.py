@@ -1,6 +1,6 @@
 """a worked example: build an order and write the IDT upload sheet."""
 
-from py_idt import IDTOrder
+from py_idt_order import IDTOrder
 
 # configure output directory
 IDTOrder.settings["output_dir"] = "example_order"

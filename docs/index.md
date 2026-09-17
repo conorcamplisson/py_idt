@@ -1,21 +1,21 @@
-# py_idt
+# py_idt_order
 
 A python interface for creating [IDT](https://www.idtdna.com/site/order/oligoentry) bulk oligo
 order forms in Excel.
 
-You design oligos in python; IDT wants a spreadsheet. `py_idt` is the bit in between: describe an
+You design oligos in python; IDT wants a spreadsheet. `py_idt_order` is the bit in between: describe an
 order in code, get an `.xlsx` you can upload to IDT's bulk input page.
 
 ## Install
 
 ```bash
-pip install py_idt
+pip install py-idt-order
 ```
 
 ## A first order
 
 ```python
-from py_idt import IDTOrder
+from py_idt_order import IDTOrder
 
 IDTOrder.settings["output_dir"] = "example_order"
 

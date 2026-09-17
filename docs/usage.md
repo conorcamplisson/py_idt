@@ -6,7 +6,7 @@ An **order** is a collection of oligos plus the defaults they inherit. An **olig
 sequence, a scale and a purification.
 
 ```python
-from py_idt import IDTOrder
+from py_idt_order import IDTOrder
 
 order = IDTOrder()
 order.add_oligo("probe_1", "ACGTACGTACGTACGTACGT")
@@ -33,7 +33,7 @@ IDT accepts a fixed set of codes. An unrecognized one raises `ValueError` naming
 options:
 
 ```python
-from py_idt import Oligo
+from py_idt_order import Oligo
 
 Oligo("probe_1", "ACGT", "not-a-scale", "STD")
 # ValueError: 'not-a-scale' is not a valid oligo scale.
@@ -43,7 +43,7 @@ Oligo("probe_1", "ACGT", "not-a-scale", "STD")
 To see the full tables, with what each code means:
 
 ```python
-from py_idt.utils import get_scales, get_purifications
+from py_idt_order.utils import get_scales, get_purifications
 
 print(get_scales())
 print(get_purifications())
@@ -57,7 +57,7 @@ IDT modification codes go inline in the sequence, in their usual `/…/` form:
 order.add_oligo("phosphorylated", "/5Phos/AAAAACCCCCGGGGGTTTTT")
 ```
 
-`py_idt` passes the sequence through unchanged; IDT validates it on upload.
+`py_idt_order` passes the sequence through unchanged; IDT validates it on upload.
 
 ## Where the file goes
 
