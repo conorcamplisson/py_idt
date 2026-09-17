@@ -1,5 +1,5 @@
 # Changelog
 
 ```{include} ../CHANGELOG.md
-:start-after: "(canon/05)."
+:start-after: "Semantic Versioning"
 ```

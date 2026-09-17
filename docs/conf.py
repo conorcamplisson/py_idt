@@ -1,4 +1,4 @@
-"""sphinx configuration (canon/06)."""
+"""sphinx configuration."""
 
 import sys
 from pathlib import Path
@@ -14,8 +14,8 @@ release = __version__
 
 extensions = [
     "sphinx.ext.autodoc",
-    "sphinx.ext.napoleon",  # reads the Google-style docstrings (canon/01)
-    "myst_parser",  # docs pages are Markdown, like the README (canon/06)
+    "sphinx.ext.napoleon",  # reads the Google-style docstrings
+    "myst_parser",  # docs pages are Markdown, like the README
 ]
 
 # napoleon is configured for Google style only; numpy style is not used here.

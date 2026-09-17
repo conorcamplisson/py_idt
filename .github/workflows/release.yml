@@ -1,17 +1,15 @@
 # Release — the only thing that publishes. Triggered by a tag.
 #
-# PROPOSED template for canon/08 and canon/09. Not yet run against a real repo.
-#
 #   tag vX.Y.Z on main   -> guards -> build once -> TestPyPI -> install test -> APPROVAL -> PyPI
 #   tag vX.Y.Z.devN      -> guards -> build once -> TestPyPI -> install test -> stop (rehearsal)
 #
 # The same artifacts go to TestPyPI and to PyPI, so what was rehearsed is byte-for-byte what ships.
-# Publishing uses an API token per index (canon/09), taken from a GitHub repository secret.
+# Publishing uses an API token per index, taken from a GitHub repository secret.
 # Trusted publishing (OIDC) is the target end state and needs only this file to change; the
 # commented lines in each publish step show the swap.
 #
 # One-time setup this depends on:
-#   - a GitHub environment named `pypi` with the maintainer as a required reviewer (canon/09)
+#   - a GitHub environment named `pypi` with the maintainer as a required reviewer
 #   - a PyPI *pending publisher* registered for this repo + workflow filename + environment,
 #     before the first upload; the first run claims the project
 #   - a TestPyPI pending publisher likewise
@@ -93,7 +91,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # Every maintained Python (canon/03). This list is DERIVED, not remembered: run
+        # Every maintained Python. This list is DERIVED, not remembered: run
         # `python_support.py check <repo>` (or audit_package.py, which calls it) to verify it
         # against the committed EOL snapshot. Update it and `requires-python` in the same commit.
         python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
@@ -107,12 +105,16 @@ jobs:
           set -euo pipefail
           TAG="${GITHUB_REF#refs/tags/v}"
           PKG=$(basename $(ls -d src/*/ | head -1))
+          # A VENV, not --system: setup-uv provides a uv-MANAGED interpreter, and --system looks
+          # for a system one, which the runner does not have for every version in the matrix
+          # ("No system Python installation found for Python 3.13").
+          uv venv --python "${UV_PYTHON}" .venv-install-test
           # TestPyPI does not mirror real dependencies, so resolve those from PyPI.
-          uv pip install --system \
+          uv pip install --python .venv-install-test/bin/python \
             --index-url https://test.pypi.org/simple/ \
             --extra-index-url https://pypi.org/simple/ \
             "${PKG}==${TAG}"
-          python -c "import ${PKG}, sys; assert ${PKG}.__version__ == '${TAG}', ${PKG}.__version__; print(${PKG}.__version__)"
+          .venv-install-test/bin/python -c "import ${PKG}; assert ${PKG}.__version__ == '${TAG}', ${PKG}.__version__; print(${PKG}.__version__)"
 
   pypi:
     # The gate. GitHub holds this job until a required reviewer approves, which is the moment to
