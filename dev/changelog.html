@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Changelog &#8212; py_idt 0.1.1</title>
+    <title>Changelog &#8212; py_idt_order 0.1.2</title>
   
   
   
@@ -38,14 +38,14 @@
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="_static/documentation_options.js?v=a58bc63e"></script>
+    <script src="_static/documentation_options.js?v=92734c54"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'changelog';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://conorcamplisson.github.io/py_idt/switcher.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.1.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.1.2';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             false;
         </script>
@@ -116,7 +116,7 @@
   
   
   
-    <p class="title logo__title">py_idt 0.1.1</p>
+    <p class="title logo__title">py_idt_order 0.1.2</p>
   
 </a></div>
     
@@ -402,12 +402,17 @@
 <h1>Changelog<a class="headerlink" href="#changelog" title="Link to this heading">#</a></h1>
 <p>](https://semver.org/spec/v2.0.0.html).</p>
 <section id="unreleased">
-<h2><a class="reference external" href="https://github.com/conorcamplisson/py_idt/compare/v0.1.1...HEAD">Unreleased</a><a class="headerlink" href="#unreleased" title="Link to this heading">#</a></h2>
+<h2><a class="reference external" href="https://github.com/conorcamplisson/py_idt/compare/v0.1.2...HEAD">Unreleased</a><a class="headerlink" href="#unreleased" title="Link to this heading">#</a></h2>
 </section>
 <section id="id1">
-<h2><a class="reference external" href="https://github.com/conorcamplisson/py_idt/releases/tag/v0.1.1">0.1.1</a> - 2026-09-17<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">0.1.0</span></code> was tagged but its release run failed before publishing, so <code class="docutils literal notranslate"><span class="pre">0.1.1</span></code> is the first
-published version. The changes below are everything since the pre-packaging code.</p>
+<h2><a class="reference external" href="https://github.com/conorcamplisson/py_idt/releases/tag/v0.1.2">0.1.2</a> - 2026-09-17<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>Renamed. PyPI rejected <code class="docutils literal notranslate"><span class="pre">py_idt</span></code> as too similar to the existing <code class="docutils literal notranslate"><span class="pre">idt</span></code> project — it strips the <code class="docutils literal notranslate"><span class="pre">py</span></code>
+prefix when comparing names. The distribution is now <code class="docutils literal notranslate"><span class="pre">py-idt-order</span></code> and the import is
+<code class="docutils literal notranslate"><span class="pre">py_idt_order</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">py_idt_order</span><span class="w"> </span><span class="kn">import</span> <span class="n">IDTOrder</span>
+</pre></div>
+</div>
+<p>Neither <code class="docutils literal notranslate"><span class="pre">0.1.0</span></code> nor <code class="docutils literal notranslate"><span class="pre">0.1.1</span></code> was ever published, so nothing depends on the old name.</p>
 <section id="added">
 <h3>Added<a class="headerlink" href="#added" title="Link to this heading">#</a></h3>
 <ul class="simple">
@@ -433,7 +438,7 @@ printable table. <code class="docutils literal notranslate"><span class="pre">ut
 instead of calling <code class="docutils literal notranslate"><span class="pre">sys.exit()</span></code>. A library that exits kills its caller’s process; a caller can
 catch a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>.</p></li>
 <li><p>Packaging brought to the develop-python canon: hatchling replaces setuptools, the version moves
-to <code class="docutils literal notranslate"><span class="pre">src/py_idt/_version.py</span></code>, and the package moves to a <code class="docutils literal notranslate"><span class="pre">src/</span></code> layout. No functional change to
+to <code class="docutils literal notranslate"><span class="pre">src/py_idt_order/_version.py</span></code>, and the package moves to a <code class="docutils literal notranslate"><span class="pre">src/</span></code> layout. No functional change to
 any module.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">xlrd</span></code> dropped from the dependencies; it was declared but never imported.</p></li>
 <li><p>A nested <code class="docutils literal notranslate"><span class="pre">output_dir</span></code> such as <code class="docutils literal notranslate"><span class="pre">out/orders</span></code> is created rather than raising <code class="docutils literal notranslate"><span class="pre">FileNotFoundError</span></code>.</p></li>
@@ -496,7 +501,7 @@ fonts included, at 2.4 MB against a 6.8 KB wheel; sdist contents are now declare
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unreleased">Unreleased</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">0.1.1 - 2026-09-17</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">0.1.2 - 2026-09-17</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#added">Added</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#changed">Changed</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fixed">Fixed</a></li>

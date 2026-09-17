@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Usage &#8212; py_idt 0.1.1</title>
+    <title>Usage &#8212; py_idt_order 0.1.2</title>
   
   
   
@@ -38,21 +38,21 @@
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="_static/documentation_options.js?v=a58bc63e"></script>
+    <script src="_static/documentation_options.js?v=92734c54"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'usage';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://conorcamplisson.github.io/py_idt/switcher.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.1.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.1.2';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             false;
         </script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="API reference" href="api.html" />
-    <link rel="prev" title="py_idt" href="index.html" />
+    <link rel="prev" title="py_idt_order" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -117,7 +117,7 @@
   
   
   
-    <p class="title logo__title">py_idt 0.1.1</p>
+    <p class="title logo__title">py_idt_order 0.1.2</p>
   
 </a></div>
     
@@ -405,7 +405,7 @@
 <h2>Orders and oligos<a class="headerlink" href="#orders-and-oligos" title="Link to this heading">#</a></h2>
 <p>An <strong>order</strong> is a collection of oligos plus the defaults they inherit. An <strong>oligo</strong> is a name, a
 sequence, a scale and a purification.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">py_idt</span><span class="w"> </span><span class="kn">import</span> <span class="n">IDTOrder</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">py_idt_order</span><span class="w"> </span><span class="kn">import</span> <span class="n">IDTOrder</span>
 
 <span class="n">order</span> <span class="o">=</span> <span class="n">IDTOrder</span><span class="p">()</span>
 <span class="n">order</span><span class="o">.</span><span class="n">add_oligo</span><span class="p">(</span><span class="s2">"probe_1"</span><span class="p">,</span> <span class="s2">"ACGTACGTACGTACGTACGT"</span><span class="p">)</span>
@@ -430,7 +430,7 @@ oligo only where they differ:</p>
 <h2>Valid scale and purification codes<a class="headerlink" href="#valid-scale-and-purification-codes" title="Link to this heading">#</a></h2>
 <p>IDT accepts a fixed set of codes. An unrecognized one raises <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> naming the valid
 options:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">py_idt</span><span class="w"> </span><span class="kn">import</span> <span class="n">Oligo</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">py_idt_order</span><span class="w"> </span><span class="kn">import</span> <span class="n">Oligo</span>
 
 <span class="n">Oligo</span><span class="p">(</span><span class="s2">"probe_1"</span><span class="p">,</span> <span class="s2">"ACGT"</span><span class="p">,</span> <span class="s2">"not-a-scale"</span><span class="p">,</span> <span class="s2">"STD"</span><span class="p">)</span>
 <span class="c1"># ValueError: 'not-a-scale' is not a valid oligo scale.</span>
@@ -438,7 +438,7 @@ options:</p>
 </pre></div>
 </div>
 <p>To see the full tables, with what each code means:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">py_idt.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_scales</span><span class="p">,</span> <span class="n">get_purifications</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">py_idt_order.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_scales</span><span class="p">,</span> <span class="n">get_purifications</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">get_scales</span><span class="p">())</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">get_purifications</span><span class="p">())</span>
@@ -451,7 +451,7 @@ options:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">order</span><span class="o">.</span><span class="n">add_oligo</span><span class="p">(</span><span class="s2">"phosphorylated"</span><span class="p">,</span> <span class="s2">"/5Phos/AAAAACCCCCGGGGGTTTTT"</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">py_idt</span></code> passes the sequence through unchanged; IDT validates it on upload.</p>
+<p><code class="docutils literal notranslate"><span class="pre">py_idt_order</span></code> passes the sequence through unchanged; IDT validates it on upload.</p>
 </section>
 <section id="where-the-file-goes">
 <h2>Where the file goes<a class="headerlink" href="#where-the-file-goes" title="Link to this heading">#</a></h2>
@@ -503,7 +503,7 @@ never overwrite each other. It returns the path it wrote:</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">py_idt</p>
+        <p class="prev-next-title">py_idt_order</p>
       </div>
     </a>
     <a class="right-next"

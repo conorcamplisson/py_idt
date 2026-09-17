@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>API reference &#8212; py_idt 0.1.1</title>
+    <title>API reference &#8212; py_idt_order 0.1.2</title>
   
   
   
@@ -38,14 +38,14 @@
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="_static/documentation_options.js?v=a58bc63e"></script>
+    <script src="_static/documentation_options.js?v=92734c54"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://conorcamplisson.github.io/py_idt/switcher.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.1.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.1.2';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             false;
         </script>
@@ -117,7 +117,7 @@
   
   
   
-    <p class="title logo__title">py_idt 0.1.1</p>
+    <p class="title logo__title">py_idt_order 0.1.2</p>
   
 </a></div>
     
@@ -402,12 +402,12 @@
   <section id="api-reference">
 <h1>API reference<a class="headerlink" href="#api-reference" title="Link to this heading">#</a></h1>
 <p>Generated from the docstrings, so it cannot drift from the code.</p>
-<section id="module-py_idt.idt_order">
-<span id="orders"></span><h2>Orders<a class="headerlink" href="#module-py_idt.idt_order" title="Link to this heading">#</a></h2>
+<section id="module-py_idt_order.idt_order">
+<span id="orders"></span><h2>Orders<a class="headerlink" href="#module-py_idt_order.idt_order" title="Link to this heading">#</a></h2>
 <p>the order: a collection of oligos, written out as an IDT bulk-order .xlsx.</p>
 <dl class="py class">
-<dt class="sig sig-object py" id="py_idt.idt_order.IDTOrder">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">py_idt.idt_order.</span></span><span class="sig-name descname"><span class="pre">IDTOrder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">purification</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#py_idt.idt_order.IDTOrder" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="py_idt_order.idt_order.IDTOrder">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">py_idt_order.idt_order.</span></span><span class="sig-name descname"><span class="pre">IDTOrder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">purification</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#py_idt_order.idt_order.IDTOrder" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Python representation of an IDT bulk oligonucleotide order.</p>
 <dl class="field-list simple">
@@ -422,8 +422,8 @@
 </dd>
 </dl>
 <dl class="py method">
-<dt class="sig sig-object py" id="py_idt.idt_order.IDTOrder.add_oligo">
-<span class="sig-name descname"><span class="pre">add_oligo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">purification</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#py_idt.idt_order.IDTOrder.add_oligo" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="py_idt_order.idt_order.IDTOrder.add_oligo">
+<span class="sig-name descname"><span class="pre">add_oligo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">purification</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#py_idt_order.idt_order.IDTOrder.add_oligo" title="Link to this definition">#</a></dt>
 <dd><p>Add a new Oligo object to an IDT bulk oligo order.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -442,8 +442,8 @@ for this oligo.</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="py_idt.idt_order.IDTOrder.save">
-<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#py_idt.idt_order.IDTOrder.save" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="py_idt_order.idt_order.IDTOrder.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#py_idt_order.idt_order.IDTOrder.save" title="Link to this definition">#</a></dt>
 <dd><p>Creates an .xlsx file to be uploaded to IDT’s website to create a bulk oligo order.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -457,19 +457,19 @@ for this oligo.</p></li>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="py_idt.idt_order.IDTOrder.settings">
-<span class="sig-name descname"><span class="pre">settings</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'output_dir':</span> <span class="pre">'IDT_xlsx_output',</span> <span class="pre">'purification':</span> <span class="pre">'STD',</span> <span class="pre">'scale':</span> <span class="pre">'25nm'}</span></em><a class="headerlink" href="#py_idt.idt_order.IDTOrder.settings" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="py_idt_order.idt_order.IDTOrder.settings">
+<span class="sig-name descname"><span class="pre">settings</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'output_dir':</span> <span class="pre">'IDT_xlsx_output',</span> <span class="pre">'purification':</span> <span class="pre">'STD',</span> <span class="pre">'scale':</span> <span class="pre">'25nm'}</span></em><a class="headerlink" href="#py_idt_order.idt_order.IDTOrder.settings" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 </section>
-<section id="module-py_idt.oligo">
-<span id="oligos"></span><h2>Oligos<a class="headerlink" href="#module-py_idt.oligo" title="Link to this heading">#</a></h2>
+<section id="module-py_idt_order.oligo">
+<span id="oligos"></span><h2>Oligos<a class="headerlink" href="#module-py_idt_order.oligo" title="Link to this heading">#</a></h2>
 <p>a single oligo on an order, with its scale and purification validated.</p>
 <dl class="py class">
-<dt class="sig sig-object py" id="py_idt.oligo.Oligo">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">py_idt.oligo.</span></span><span class="sig-name descname"><span class="pre">Oligo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">purification</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#py_idt.oligo.Oligo" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="py_idt_order.oligo.Oligo">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">py_idt_order.oligo.</span></span><span class="sig-name descname"><span class="pre">Oligo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">purification</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#py_idt_order.oligo.Oligo" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Python representation of an IDT oligonucleotide to be ordered.</p>
 <dl class="field-list simple">
@@ -486,24 +486,24 @@ for this oligo.</p></li>
 </dd></dl>
 
 </section>
-<section id="module-py_idt.utils">
-<span id="helpers"></span><h2>Helpers<a class="headerlink" href="#module-py_idt.utils" title="Link to this heading">#</a></h2>
+<section id="module-py_idt_order.utils">
+<span id="helpers"></span><h2>Helpers<a class="headerlink" href="#module-py_idt_order.utils" title="Link to this heading">#</a></h2>
 <p>helpers for reporting the valid scale and purification codes.</p>
 <dl class="py function">
-<dt class="sig sig-object py" id="py_idt.utils.get_purifications">
-<span class="sig-prename descclassname"><span class="pre">py_idt.utils.</span></span><span class="sig-name descname"><span class="pre">get_purifications</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#py_idt.utils.get_purifications" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="py_idt_order.utils.get_purifications">
+<span class="sig-prename descclassname"><span class="pre">py_idt_order.utils.</span></span><span class="sig-name descname"><span class="pre">get_purifications</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#py_idt_order.utils.get_purifications" title="Link to this definition">#</a></dt>
 <dd><p>Helper function to display valid IDT oligo purification options.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="py_idt.utils.get_scales">
-<span class="sig-prename descclassname"><span class="pre">py_idt.utils.</span></span><span class="sig-name descname"><span class="pre">get_scales</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#py_idt.utils.get_scales" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="py_idt_order.utils.get_scales">
+<span class="sig-prename descclassname"><span class="pre">py_idt_order.utils.</span></span><span class="sig-name descname"><span class="pre">get_scales</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#py_idt_order.utils.get_scales" title="Link to this definition">#</a></dt>
 <dd><p>Helper function to display valid IDT oligo scale options.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="py_idt.utils.purification_codes">
-<span class="sig-prename descclassname"><span class="pre">py_idt.utils.</span></span><span class="sig-name descname"><span class="pre">purification_codes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#py_idt.utils.purification_codes" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="py_idt_order.utils.purification_codes">
+<span class="sig-prename descclassname"><span class="pre">py_idt_order.utils.</span></span><span class="sig-name descname"><span class="pre">purification_codes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#py_idt_order.utils.purification_codes" title="Link to this definition">#</a></dt>
 <dd><p>The valid IDT purification codes, comma separated.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -513,8 +513,8 @@ for this oligo.</p></li>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="py_idt.utils.scale_codes">
-<span class="sig-prename descclassname"><span class="pre">py_idt.utils.</span></span><span class="sig-name descname"><span class="pre">scale_codes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#py_idt.utils.scale_codes" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="py_idt_order.utils.scale_codes">
+<span class="sig-prename descclassname"><span class="pre">py_idt_order.utils.</span></span><span class="sig-name descname"><span class="pre">scale_codes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#py_idt_order.utils.scale_codes" title="Link to this definition">#</a></dt>
 <dd><p>The valid IDT scale codes, comma separated.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -529,8 +529,8 @@ for this oligo.</p></li>
 </dd></dl>
 
 </section>
-<section id="module-py_idt.defaults">
-<span id="defaults"></span><h2>Defaults<a class="headerlink" href="#module-py_idt.defaults" title="Link to this heading">#</a></h2>
+<section id="module-py_idt_order.defaults">
+<span id="defaults"></span><h2>Defaults<a class="headerlink" href="#module-py_idt_order.defaults" title="Link to this heading">#</a></h2>
 <p>default order settings, and the IDT scale and purification code tables.</p>
 </section>
 </section>
@@ -582,27 +582,27 @@ for this oligo.</p></li>
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-py_idt.idt_order">Orders</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#py_idt.idt_order.IDTOrder"><code class="docutils literal notranslate"><span class="pre">IDTOrder</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#py_idt.idt_order.IDTOrder.add_oligo"><code class="docutils literal notranslate"><span class="pre">IDTOrder.add_oligo()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#py_idt.idt_order.IDTOrder.save"><code class="docutils literal notranslate"><span class="pre">IDTOrder.save()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#py_idt.idt_order.IDTOrder.settings"><code class="docutils literal notranslate"><span class="pre">IDTOrder.settings</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-py_idt_order.idt_order">Orders</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#py_idt_order.idt_order.IDTOrder"><code class="docutils literal notranslate"><span class="pre">IDTOrder</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#py_idt_order.idt_order.IDTOrder.add_oligo"><code class="docutils literal notranslate"><span class="pre">IDTOrder.add_oligo()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#py_idt_order.idt_order.IDTOrder.save"><code class="docutils literal notranslate"><span class="pre">IDTOrder.save()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#py_idt_order.idt_order.IDTOrder.settings"><code class="docutils literal notranslate"><span class="pre">IDTOrder.settings</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-py_idt.oligo">Oligos</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#py_idt.oligo.Oligo"><code class="docutils literal notranslate"><span class="pre">Oligo</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-py_idt_order.oligo">Oligos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#py_idt_order.oligo.Oligo"><code class="docutils literal notranslate"><span class="pre">Oligo</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-py_idt.utils">Helpers</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#py_idt.utils.get_purifications"><code class="docutils literal notranslate"><span class="pre">get_purifications()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#py_idt.utils.get_scales"><code class="docutils literal notranslate"><span class="pre">get_scales()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#py_idt.utils.purification_codes"><code class="docutils literal notranslate"><span class="pre">purification_codes()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#py_idt.utils.scale_codes"><code class="docutils literal notranslate"><span class="pre">scale_codes()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-py_idt_order.utils">Helpers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#py_idt_order.utils.get_purifications"><code class="docutils literal notranslate"><span class="pre">get_purifications()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#py_idt_order.utils.get_scales"><code class="docutils literal notranslate"><span class="pre">get_scales()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#py_idt_order.utils.purification_codes"><code class="docutils literal notranslate"><span class="pre">purification_codes()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#py_idt_order.utils.scale_codes"><code class="docutils literal notranslate"><span class="pre">scale_codes()</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-py_idt.defaults">Defaults</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-py_idt_order.defaults">Defaults</a></li>
 </ul>
   </nav></div>
 
