@@ -9,6 +9,10 @@ All notable changes to this project are documented here. Hand-edited, newest fir
 - `IDTOrder(output_dir=...)`, and assigning `order.output_dir`, now control where that order is
   written. Previously the only way to choose a directory was `IDTOrder.settings["output_dir"]`,
   which every order in the process shares.
+- `IDTOrder.save(path=...)` writes to an exact file of your choosing, creating parent directories
+  as needed.
+- `IDTOrder.save()` returns the path it wrote, so the caller no longer has to re-derive a
+  timestamped filename to find the file.
 
 ### Changed
 

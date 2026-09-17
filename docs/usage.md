@@ -74,7 +74,19 @@ per-order form unless you really do want to move every order at once. Nested pat
 you.
 
 `save()` creates the directory if needed and writes `<timestamp>_idt_order.xlsx`, so repeated runs
-never overwrite each other.
+never overwrite each other. It returns the path it wrote:
+
+```python
+written = order.save()
+print(written)        # example_order/20260917_021500_idt_order.xlsx
+```
+
+To choose the filename yourself, pass one. Parent directories are created for you, and
+`output_dir` is not consulted:
+
+```python
+order.save(path="orders/2026-09-17-probes.xlsx")
+```
 
 ## Uploading to IDT
 

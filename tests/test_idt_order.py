@@ -72,3 +72,21 @@ def test_a_nested_output_dir_is_created(tmp_path):
     order.add_oligo("probe_1", "ACGT")
     order.save()
     assert len(list((tmp_path / "deeply" / "nested" / "out").glob("*.xlsx"))) == 1
+
+
+def test_save_returns_the_path_it_wrote(tmp_path):
+    order = IDTOrder(output_dir=str(tmp_path))
+    order.add_oligo("probe_1", "ACGT")
+    written = order.save()
+    assert Path(written).is_file()
+    assert Path(written).name.endswith("_idt_order.xlsx")
+
+
+def test_save_accepts_an_explicit_path(tmp_path):
+    order = IDTOrder(output_dir=str(tmp_path / "ignored"))
+    order.add_oligo("probe_1", "ACGT")
+    target = tmp_path / "chosen" / "my_order.xlsx"
+    written = order.save(path=str(target))
+    assert Path(written) == target
+    assert target.is_file()
+    assert not (tmp_path / "ignored").exists(), "output_dir should be unused when path is given"

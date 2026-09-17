@@ -76,14 +76,15 @@ class IDTOrder:
         self.oligos.append(oligo)
         self.num_oligos = len(self.oligos)
 
-    def save(self):
+    def save(self, path=None):
         """Creates an .xlsx file to be uploaded to IDT's website to create a bulk oligo order.
 
         Args:
-            None
+            path (str): Optionally write to this exact file instead of a timestamped name in
+                ``output_dir``. Parent directories are created if needed.
 
         Returns:
-            None
+            str: The path of the file that was written.
         """
         # construct a pandas dataframe from associated oligo object data
         rows = []
@@ -99,20 +100,26 @@ class IDTOrder:
         df = pd.DataFrame(data=rows, columns=cols)
 
         # construct output .xlsx file path
-        # NOTE: this reads the INSTANCE attribute. It used to read IDTOrder.settings directly,
-        # so self.output_dir was assigned in __init__ and then never consulted: setting
-        # order.output_dir had no effect at all.
-        output_dir = self.output_dir
-        # makedirs, not mkdir: a nested path like "out/orders" raised FileNotFoundError
-        os.makedirs(output_dir, exist_ok=True)
-        time_stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        file_path = os.path.join(output_dir, f"{time_stamp}_idt_order.xlsx")
+        if path:
+            file_path = path
+            parent = os.path.dirname(os.path.abspath(file_path))
+            os.makedirs(parent, exist_ok=True)
+        else:
+            # NOTE: this reads the INSTANCE attribute. It used to read IDTOrder.settings
+            # directly, so self.output_dir was assigned in __init__ and then never consulted.
+            # makedirs, not mkdir: a nested path like "out/orders" raised FileNotFoundError.
+            os.makedirs(self.output_dir, exist_ok=True)
+            time_stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            file_path = os.path.join(self.output_dir, f"{time_stamp}_idt_order.xlsx")
 
         # create an excel sheet using IDT oligo data
         # NOTE: pandas 2.0 removed ExcelWriter.save(); close() is the supported way to flush and
         # write the file, and it is also what the context manager calls.
         with pd.ExcelWriter(file_path, engine="xlsxwriter") as writer:
             df.to_excel(writer, sheet_name="Sheet1", index=False)
+
+        # returning the path means the caller does not have to re-derive a timestamped filename
+        return file_path
 
     def __str__(self):
         """String object representation."""
