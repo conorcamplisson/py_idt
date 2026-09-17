@@ -1,0 +1,91 @@
+# CI — runs on every push to dev and every pull request into main.
+#
+# Fill in before use:
+#   python-version   the matrix below is checked by python_support.py; refresh it whenever
+#                    that check reports a mismatch.
+name: ci
+
+on:
+  push:
+    branches: [dev]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  # A newer push to the same branch cancels the older run; a release must never be cancelled.
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - name: Sync from the lock file
+        # --locked fails if uv.lock no longer matches pyproject.toml, which is the whole point of
+        # committing the lock: CI and every machine resolve to identical versions.
+        run: uv sync --locked
+      - run: uv run ruff format --check .
+      - run: uv run ruff check .
+
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false        # one Python failing must not hide the others
+      matrix:
+        # Every maintained Python (canon/03). This list is DERIVED, not remembered: run
+        # `python_support.py check <repo>` (or audit_package.py, which calls it) to verify it
+        # against the committed EOL snapshot. Update it and `requires-python` in the same commit.
+        python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
+    steps:
+      - uses: actions/checkout@v5
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+          python-version: ${{ matrix.python-version }}
+      - run: uv sync --locked
+      - run: uv run pytest
+
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - run: uv sync --locked
+      - name: Build the docs, warnings are errors
+        # -W turns a broken reference or a renamed theme option into a failure instead of a line
+        # of log nobody reads. --keep-going reports every problem in one run, not just the first.
+        run: uv run sphinx-build -W --keep-going docs docs/_build/html
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: astral-sh/setup-uv@v6
+      - run: uv build
+      - name: Check the built metadata
+        run: uvx twine check --strict dist/*
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+  main-contained-in-dev:
+    # Only on a release pull request. If an urgent fix went to main and was never merged back,
+    # releasing now would quietly drop it — so refuse until the merge-back has happened.
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0        # the default shallow clone cannot compute ancestry
+      - name: main must be an ancestor of this branch
+        run: |
+          git fetch origin main
+          git merge-base --is-ancestor origin/main HEAD \
+            || { echo "::error::main is not contained in this branch — merge main into dev first"; exit 1; }
