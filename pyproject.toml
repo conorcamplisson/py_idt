@@ -43,6 +43,25 @@ Changelog = "https://github.com/conorcamplisson/py_idt/blob/main/CHANGELOG.md"
 [tool.hatch.version]
 path = "src/py_idt/_version.py"
 
+# canon/02 "Package data": nothing ships by default, everything is declared. Without this the
+# sdist picked up docs/_build/ — the whole rendered Sphinx site, fonts included — and weighed
+# 2.4 MB against a 6.8 KB wheel.
+[tool.hatch.build.targets.sdist]
+include = [
+    "src/",
+    "tests/",
+    "examples/",
+    "docs/",
+    "images/",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md",
+]
+exclude = ["docs/_build/"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/py_idt"]
+
 [dependency-groups]
 # Dev tools are NOT bound by the package's supported-Python floor: they run on the developer's
 # machine and in one CI job, not on the user's interpreter. The docs toolchain has dropped 3.10,

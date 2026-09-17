@@ -3,6 +3,25 @@
 from py_idt.defaults import PURIFICATION_DICT, SCALE_DICT
 
 
+def scale_codes():
+    """The valid IDT scale codes, comma separated.
+
+    Returns:
+        str: e.g. "25nm, 100nm, 250nm". Suited to an error message; use get_scales() for the
+            full table a human reads.
+    """
+    return ", ".join(SCALE_DICT)
+
+
+def purification_codes():
+    """The valid IDT purification codes, comma separated.
+
+    Returns:
+        str: suited to an error message; see get_purifications() for the full table.
+    """
+    return ", ".join(PURIFICATION_DICT)
+
+
 def get_scales():
     """Helper function to display valid IDT oligo scale options."""
     # construct IDT scale table as a formatted string

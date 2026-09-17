@@ -1,7 +1,7 @@
 """a single oligo on an order, with its scale and purification validated."""
 
 from py_idt.defaults import PURIFICATION_DICT, SCALE_DICT
-from py_idt.utils import get_purifications, get_scales
+from py_idt.utils import purification_codes, scale_codes
 
 
 class Oligo:
@@ -44,12 +44,12 @@ class Oligo:
         # caller's process, so a script importing py_idt could not catch a bad code and carry on.
         if self.scale not in SCALE_DICT:
             raise ValueError(
-                f"{scale!r} is not a valid oligo scale. Try: {get_scales()}"
+                f"{scale!r} is not a valid oligo scale. Valid codes: {scale_codes()}"
             )
         if self.purification not in PURIFICATION_DICT:
             raise ValueError(
                 f"{purification!r} is not a valid oligo purification. "
-                f"Try: {get_purifications()}"
+                f"Valid codes: {purification_codes()}"
             )
 
     def __str__(self):
