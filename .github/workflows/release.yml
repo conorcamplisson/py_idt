@@ -27,7 +27,7 @@ jobs:
     outputs:
       is-prerelease: ${{ steps.check.outputs.is_prerelease }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
       - id: check
@@ -54,11 +54,11 @@ jobs:
     needs: guards
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-      - uses: astral-sh/setup-uv@v10
+      - uses: actions/checkout@v7.0.1
+      - uses: astral-sh/setup-uv@v10.1.0
       - run: uv build
       - run: uvx twine check --strict dist/*
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@v7.0.1
         with:
           name: dist
           path: dist/
@@ -68,11 +68,11 @@ jobs:
     runs-on: ubuntu-latest
     environment: testpypi
     steps:
-      - uses: actions/download-artifact@v8
+      - uses: actions/download-artifact@v8.0.1
         with:
           name: dist
           path: dist/
-      - uses: astral-sh/setup-uv@v10
+      - uses: astral-sh/setup-uv@v10.1.0
       - name: Upload to TestPyPI
         # --check-url lets a re-run of a partially-failed job skip files already uploaded,
         # instead of erroring on the index's refusal to accept a version twice.
@@ -98,8 +98,8 @@ jobs:
         # against the committed EOL snapshot. Update it and `requires-python` in the same commit.
         python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
     steps:
-      - uses: actions/checkout@v7
-      - uses: astral-sh/setup-uv@v10
+      - uses: actions/checkout@v7.0.1
+      - uses: astral-sh/setup-uv@v10.1.0
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install from TestPyPI and smoke-test
@@ -122,11 +122,11 @@ jobs:
     runs-on: ubuntu-latest
     environment: pypi
     steps:
-      - uses: actions/download-artifact@v8
+      - uses: actions/download-artifact@v8.0.1
         with:
           name: dist
           path: dist/
-      - uses: astral-sh/setup-uv@v10
+      - uses: astral-sh/setup-uv@v10.1.0
       - name: Upload to PyPI
         # To move to trusted publishing: drop UV_PUBLISH_TOKEN and add
         # `--trusted-publishing always`, with `permissions: id-token: write` on this job.
@@ -140,8 +140,8 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v7
-      - uses: actions/download-artifact@v8
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/download-artifact@v8.0.1
         with:
           name: dist
           path: dist/
