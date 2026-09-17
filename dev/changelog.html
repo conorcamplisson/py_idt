@@ -417,6 +417,8 @@ timestamped filename to find the file.</p></li>
 <section id="changed">
 <h3>Changed<a class="headerlink" href="#changed" title="Link to this heading">#</a></h3>
 <ul class="simple">
+<li><p>Every link and image in the README is an absolute URL. They were relative, so the screenshots and
+file links rendered broken on the PyPI project page while looking correct on GitHub.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Oligo</span></code>’s validation errors name the valid codes on one line, rather than embedding the full
 printable table. <code class="docutils literal notranslate"><span class="pre">utils.scale_codes()</span></code> and <code class="docutils literal notranslate"><span class="pre">utils.purification_codes()</span></code> are the compact form;
 <code class="docutils literal notranslate"><span class="pre">get_scales()</span></code> and <code class="docutils literal notranslate"><span class="pre">get_purifications()</span></code> still return the table a human reads.</p></li>
