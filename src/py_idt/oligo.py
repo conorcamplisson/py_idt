@@ -1,7 +1,5 @@
 """a single oligo on an order, with its scale and purification validated."""
 
-import sys
-
 from py_idt.defaults import PURIFICATION_DICT, SCALE_DICT
 from py_idt.utils import get_purifications, get_scales
 
@@ -29,6 +27,8 @@ class Oligo:
         Returns:
             None
 
+        Raises:
+            ValueError: if `scale` or `purification` is not a recognized IDT code.
         """
         # store provided attributes
         self.name = name
@@ -40,11 +40,15 @@ class Oligo:
         self.length = len(seq)
 
         # validate scale and purification
+        # NOTE: these raise rather than calling sys.exit(). A library that exits kills its
+        # caller's process, so a script importing py_idt could not catch a bad code and carry on.
         if self.scale not in SCALE_DICT:
-            sys.exit(f"\nError: {scale} is not a valid oligo scale. Try: {get_scales()}")
+            raise ValueError(
+                f"{scale!r} is not a valid oligo scale. Try: {get_scales()}"
+            )
         if self.purification not in PURIFICATION_DICT:
-            sys.exit(
-                f"\nError: {purification} is not a valid oligo purification. "
+            raise ValueError(
+                f"{purification!r} is not a valid oligo purification. "
                 f"Try: {get_purifications()}"
             )
 
