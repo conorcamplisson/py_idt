@@ -1,0 +1,9 @@
+# runs the same checks CI runs, before the commit rather than after the push (canon/01).
+# install once per clone with: pre-commit install
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.14.0          # keep in step with the ruff pin in pyproject.toml
+    hooks:
+      - id: ruff-format
+      - id: ruff
+        args: [--fix]

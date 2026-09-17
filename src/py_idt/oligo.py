@@ -1,10 +1,12 @@
+"""a single oligo on an order, with its scale and purification validated."""
 
 import sys
 
-from py_idt.defaults import SCALE_DICT, PURIFICATION_DICT
-from py_idt.utils import get_scales, get_purifications
+from py_idt.defaults import PURIFICATION_DICT, SCALE_DICT
+from py_idt.utils import get_purifications, get_scales
 
-class Oligo(object):
+
+class Oligo:
     """Python representation of an IDT oligonucleotide to be ordered.
 
     Attributes:
@@ -26,8 +28,8 @@ class Oligo(object):
 
         Returns:
             None
-        """
 
+        """
         # store provided attributes
         self.name = name
         self.seq = seq
@@ -39,13 +41,17 @@ class Oligo(object):
 
         # validate scale and purification
         if self.scale not in SCALE_DICT:
-            sys.exit('\nError: {} is not a valid oligo scale. Try: {}'.format(scale, get_scales()))
+            sys.exit(f"\nError: {scale} is not a valid oligo scale. Try: {get_scales()}")
         if self.purification not in PURIFICATION_DICT:
-            sys.exit('\nError: {} is not a valid oligo purification. Try: {}'.format(purification, get_purifications()))
+            sys.exit(
+                f"\nError: {purification} is not a valid oligo purification. "
+                f"Try: {get_purifications()}"
+            )
 
     def __str__(self):
         """String object representation."""
-        return('<Oligo: {} ({} bp), {}, {}>'.format(self.name, self.length, self.scale, self.purification))
+        return f"<Oligo: {self.name} ({self.length} bp), {self.scale}, {self.purification}>"
+
     def __repr__(self):
         """List object representation."""
-        return(self.__str__())
+        return self.__str__()
