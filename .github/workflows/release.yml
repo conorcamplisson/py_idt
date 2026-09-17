@@ -91,9 +91,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # Every maintained Python. This list is DERIVED, not remembered: run
-        # `python_support.py check <repo>` (or audit_package.py, which calls it) to verify it
-        # against the committed EOL snapshot. Update it and `requires-python` in the same commit.
+        # Every Python this package supports. Keep it and `requires-python` in step, in the
+        # same commit: a version here that requires-python excludes will fail to resolve.
         python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
     steps:
       - uses: actions/checkout@v7.0.1

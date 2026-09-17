@@ -1,8 +1,8 @@
 # CI — runs on every push to dev and every pull request into main.
 #
 # Fill in before use:
-#   python-version   the matrix below is checked by python_support.py; refresh it whenever
-#                    that check reports a mismatch.
+#   python-version   the matrix below lists every Python this package supports. Keep it and
+#                    `requires-python` in step, in the same commit.
 name: ci
 
 on:
@@ -36,9 +36,8 @@ jobs:
     strategy:
       fail-fast: false        # one Python failing must not hide the others
       matrix:
-        # Every maintained Python. This list is DERIVED, not remembered: run
-        # `python_support.py check <repo>` (or audit_package.py, which calls it) to verify it
-        # against the committed EOL snapshot. Update it and `requires-python` in the same commit.
+        # Every Python this package supports. Keep it and `requires-python` in step, in the
+        # same commit: a version here that requires-python excludes will fail to resolve.
         python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
     steps:
       - uses: actions/checkout@v7.0.1
