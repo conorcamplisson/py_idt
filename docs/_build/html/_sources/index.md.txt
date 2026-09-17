@@ -1,6 +1,10 @@
 # py_idt
 
-A python interface for creating IDT bulk oligo order forms in Excel.
+A python interface for creating [IDT](https://www.idtdna.com/site/order/oligoentry) bulk oligo
+order forms in Excel.
+
+You design oligos in python; IDT wants a spreadsheet. `py_idt` is the bit in between: describe an
+order in code, get an `.xlsx` you can upload to IDT's bulk input page.
 
 ## Install
 
@@ -8,30 +12,31 @@ A python interface for creating IDT bulk oligo order forms in Excel.
 pip install py_idt
 ```
 
-## Quickstart
+## A first order
 
 ```python
 from py_idt import IDTOrder
 
-# an order carries defaults that each oligo can override
-order = IDTOrder(scale="100nm", purification="STD")
+IDTOrder.settings["output_dir"] = "example_order"
 
-order.add_oligo("probe_1", "ACGTACGTACGTACGTACGT")
-order.add_oligo("probe_2", "TGCATGCATGCATGCATGCA", scale="250nm", purification="PAGE")
-
-# writes a timestamped .xlsx into IDTOrder.settings["output_dir"]
+order = IDTOrder()
+order.add_oligo("Test_oligo_1", "ACGTACGTACGTACGTACGT")
 order.save()
 ```
 
-## API reference
+That writes `example_order/<timestamp>_idt_order.xlsx`.
 
-```{eval-rst}
-.. automodule:: py_idt.idt_order
-   :members:
+```{toctree}
+:maxdepth: 2
+:hidden:
 
-.. automodule:: py_idt.oligo
-   :members:
-
-.. automodule:: py_idt.utils
-   :members:
+usage
+api
+changelog
 ```
+
+## Where to go next
+
+- [Usage](usage.md) — scales, purifications, defaults and overrides, and uploading to IDT.
+- [API reference](api.md) — every public class and function.
+- [Changelog](changelog.md) — what changed, newest first.
