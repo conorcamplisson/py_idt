@@ -27,7 +27,7 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Bio-Informatics",
 ]
 
-# lower bounds for users; uv.lock pins the exact versions for development and CI (canon/03).
+# lower bounds for users; uv.lock pins the exact versions for development and CI.
 # xlrd was declared but never imported, so it is dropped rather than carried forward.
 dependencies = [
     "pandas",
@@ -43,7 +43,7 @@ Changelog = "https://github.com/conorcamplisson/py_idt/blob/master/CHANGELOG.md"
 [tool.hatch.version]
 path = "src/py_idt/_version.py"
 
-# canon/02 "Package data": nothing ships by default, everything is declared. Without this the
+# Nothing ships by default; everything is declared. Without this the
 # sdist picked up docs/_build/ — the whole rendered Sphinx site, fonts included — and weighed
 # 2.4 MB against a 6.8 KB wheel.
 [tool.hatch.build.targets.sdist]
@@ -79,7 +79,7 @@ dev = [
 line-length = 100
 
 [tool.ruff.lint]
-# ANN (type annotations) is deliberately absent — canon/01 "Type hints".
+# ANN (type annotations) is deliberately absent: this project does not use annotations.
 select = ["E", "W", "F", "I", "B", "UP", "SIM", "RUF", "D"]
 
 [tool.ruff.lint.pydocstyle]

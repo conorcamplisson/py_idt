@@ -1,12 +1,10 @@
-# Docs — builds the versioned site onto the gh-pages branch (canon/06).
-#
-# PROPOSED template for canon/08. Not yet run against a real repo.
+# Docs — builds the versioned site onto the gh-pages branch.
 #
 #   push to dev   -> gh-pages/dev/        (the development docs)
 #   tag vX.Y.Z    -> gh-pages/X.Y.Z/  + switcher.json + stable/ -> X.Y.Z
 #
 # A released version's folder is never rebuilt, so every version's docs keep describing exactly
-# what its users installed (canon/06).
+# what its users installed.
 name: docs
 
 on:

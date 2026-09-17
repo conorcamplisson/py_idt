@@ -1,8 +1,16 @@
 # Changelog
 
-All notable changes to this project are documented here. Hand-edited, newest first (canon/05).
+All notable changes to this project will be documented in this file.
 
-## [0.1.0] - 2026-09-17
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+## [0.1.1] - 2026-09-17
+
+`0.1.0` was tagged but its release run failed before publishing, so `0.1.1` is the first
+published version. The changes below are everything since the pre-packaging code.
 
 ### Added
 
@@ -16,6 +24,7 @@ All notable changes to this project are documented here. Hand-edited, newest fir
 
 ### Changed
 
+- The changelog follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Every link and image in the README is an absolute URL. They were relative, so the screenshots and
   file links rendered broken on the PyPI project page while looking correct on GitHub.
 
@@ -42,3 +51,6 @@ All notable changes to this project are documented here. Hand-edited, newest fir
 - `build/`, `dist/` and `py_idt.egg-info/` are no longer tracked in git.
 - The source distribution no longer contains the rendered docs site. It carried `docs/_build/`,
   fonts included, at 2.4 MB against a 6.8 KB wheel; sdist contents are now declared explicitly.
+
+[Unreleased]: https://github.com/conorcamplisson/py_idt/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/conorcamplisson/py_idt/releases/tag/v0.1.1

@@ -1,8 +1,5 @@
 # CI — runs on every push to dev and every pull request into main.
 #
-# PROPOSED template for canon/08 "State flow from change to release". Not yet run against a real
-# repo; treat the first run as part of the review.
-#
 # Fill in before use:
 #   python-version   the matrix below is checked by python_support.py; refresh it whenever
 #                    that check reports a mismatch.
@@ -39,7 +36,7 @@ jobs:
     strategy:
       fail-fast: false        # one Python failing must not hide the others
       matrix:
-        # Every maintained Python (canon/03). This list is DERIVED, not remembered: run
+        # Every maintained Python. This list is DERIVED, not remembered: run
         # `python_support.py check <repo>` (or audit_package.py, which calls it) to verify it
         # against the committed EOL snapshot. Update it and `requires-python` in the same commit.
         python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
