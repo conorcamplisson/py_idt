@@ -16,6 +16,9 @@ All notable changes to this project are documented here. Hand-edited, newest fir
 
 ### Changed
 
+- Every link and image in the README is an absolute URL. They were relative, so the screenshots and
+  file links rendered broken on the PyPI project page while looking correct on GitHub.
+
 - `Oligo`'s validation errors name the valid codes on one line, rather than embedding the full
   printable table. `utils.scale_codes()` and `utils.purification_codes()` are the compact form;
   `get_scales()` and `get_purifications()` still return the table a human reads.
