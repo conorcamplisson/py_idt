@@ -43,9 +43,7 @@ class Oligo:
         # NOTE: these raise rather than calling sys.exit(). A library that exits kills its
         # caller's process, so a script importing py_idt could not catch a bad code and carry on.
         if self.scale not in SCALE_DICT:
-            raise ValueError(
-                f"{scale!r} is not a valid oligo scale. Valid codes: {scale_codes()}"
-            )
+            raise ValueError(f"{scale!r} is not a valid oligo scale. Valid codes: {scale_codes()}")
         if self.purification not in PURIFICATION_DICT:
             raise ValueError(
                 f"{purification!r} is not a valid oligo purification. "
