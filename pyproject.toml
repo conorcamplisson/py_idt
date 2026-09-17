@@ -38,7 +38,7 @@ dependencies = [
 Homepage = "https://github.com/conorcamplisson/py_idt"
 Documentation = "https://conorcamplisson.github.io/py_idt/"
 Issues = "https://github.com/conorcamplisson/py_idt/issues"
-Changelog = "https://github.com/conorcamplisson/py_idt/blob/main/CHANGELOG.md"
+Changelog = "https://github.com/conorcamplisson/py_idt/blob/master/CHANGELOG.md"
 
 [tool.hatch.version]
 path = "src/py_idt/_version.py"
